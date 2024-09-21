@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3352/3352488.png" />
+    <script
+      src="https://kit.fontawesome.com/4c536a6bd5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script defer></script>
+    <title>Calculator</title>
+  </head>
+  <body>
+    <script>
+      const periodicTable = [
+    { symbol: "H", name: "Hydrogen", atomicNumber: 1, atomicMass: 1.008 },
+    { symbol: "He", name: "Helium", atomicNumber: 2, atomicMass: 4.0026 },
+    { symbol: "Li", name: "Lithium", atomicNumber: 3, atomicMass: 6.94 },
+    { symbol: "Be", name: "Beryllium", atomicNumber: 4, atomicMass: 9.0122 },
+    { symbol: "B", name: "Boron", atomicNumber: 5, atomicMass: 10.81 },
+    { symbol: "C", name: "Carbon", atomicNumber: 6, atomicMass: 12.011 },
+    { symbol: "N", name: "Nitrogen", atomicNumber: 7, atomicMass: 14.007 },
+    { symbol: "O", name: "Oxygen", atomicNumber: 8, atomicMass: 15.999 },
+    { symbol: "F", name: "Fluorine", atomicNumber: 9, atomicMass: 18.998 },
+    { symbol: "Ne", name: "Neon", atomicNumber: 10, atomicMass: 20.180 },
+    { symbol: "Na", name: "Sodium", atomicNumber: 11, atomicMass: 22.990 },
+    { symbol: "Mg", name: "Magnesium", atomicNumber: 12, atomicMass: 24.305 },
+    { symbol: "Al", name: "Aluminum", atomicNumber: 13, atomicMass: 26.982 },
+    { symbol: "Si", name: "Silicon", atomicNumber: 14, atomicMass: 28.085 },
+    { symbol: "P", name: "Phosphorus", atomicNumber: 15, atomicMass: 30.974 },
+    { symbol: "S", name: "Sulfur", atomicNumber: 16, atomicMass: 32.06 },
+    { symbol: "Cl", name: "Chlorine", atomicNumber: 17, atomicMass: 35.45 },
+    { symbol: "Ar", name: "Argon", atomicNumber: 18, atomicMass: 39.948 },
+    { symbol: "K", name: "Potassium", atomicNumber: 19, atomicMass: 39.098 },
+    { symbol: "Ca", name: "Calcium", atomicNumber: 20, atomicMass: 40.078 },
+    { symbol: "Sc", name: "Scandium", atomicNumber: 21, atomicMass: 44.956 },
+    { symbol: "Ti", name: "Titanium", atomicNumber: 22, atomicMass: 47.867 },
+    { symbol: "V", name: "Vanadium", atomicNumber: 23, atomicMass: 50.942 },
+    { symbol: "Cr", name: "Chromium", atomicNumber: 24, atomicMass: 51.996 },
+    { symbol: "Mn", name: "Manganese", atomicNumber: 25, atomicMass: 54.938 },
+    { symbol: "Fe", name: "Iron", atomicNumber: 26, atomicMass: 55.845 },
+    { symbol: "Co", name: "Cobalt", atomicNumber: 27, atomicMass: 58.933 },
+    { symbol: "Ni", name: "Nickel", atomicNumber: 28, atomicMass: 58.693 },
+    { symbol: "Cu", name: "Copper", atomicNumber: 29, atomicMass: 63.546 },
+    { symbol: "Zn", name: "Zinc", atomicNumber: 30, atomicMass: 65.38 },
+    { symbol: "Ga", name: "Gallium", atomicNumber: 31, atomicMass: 69.723 },
+    { symbol: "Ge", name: "Germanium", atomicNumber: 32, atomicMass: 72.63 },
+    { symbol: "As", name: "Arsenic", atomicNumber: 33, atomicMass: 74.922 },
+    { symbol: "Se", name: "Selenium", atomicNumber: 34, atomicMass: 78.96 },
+    { symbol: "Br", name: "Bromine", atomicNumber: 35, atomicMass: 79.904 },
+    { symbol: "Kr", name: "Krypton", atomicNumber: 36, atomicMass: 83.798 },
+    { symbol: "Rb", name: "Rubidium", atomicNumber: 37, atomicMass: 85.468 },
+    { symbol: "Sr", name: "Strontium", atomicNumber: 38, atomicMass: 87.62 },
+    { symbol: "Y", name: "Yttrium", atomicNumber: 39, atomicMass: 88.906 },
+    { symbol: "Zr", name: "Zirconium", atomicNumber: 40, atomicMass: 91.224 },
+    { symbol: "Nb", name: "Niobium", atomicNumber: 41, atomicMass: 92.906 },
+    { symbol: "Mo", name: "Molybdenum", atomicNumber: 42, atomicMass: 95.95 },
+    { symbol: "Tc", name: "Technetium", atomicNumber: 43, atomicMass: 98 },
+    { symbol: "Ru", name: "Ruthenium", atomicNumber: 44, atomicMass: 101.07 },
+    { symbol: "Rh", name: "Rhodium", atomicNumber: 45, atomicMass: 102.91 },
+    { symbol: "Pd", name: "Palladium", atomicNumber: 46, atomicMass: 106.42 },
+    { symbol: "Ag", name: "Silver", atomicNumber: 47, atomicMass: 107.87 },
+    { symbol: "Cd", name: "Cadmium", atomicNumber: 48, atomicMass: 112.41 },
+    { symbol: "In", name: "Indium", atomicNumber: 49, atomicMass: 114.82 },
+    { symbol: "Sn", name: "Tin", atomicNumber: 50, atomicMass: 118.71 },
+    { symbol: "Sb", name: "Antimony", atomicNumber: 51, atomicMass: 121.76 },
+    { symbol: "Te", name: "Tellurium", atomicNumber: 52, atomicMass: 127.6 },
+    { symbol: "I", name: "Iodine", atomicNumber: 53, atomicMass: 126.9 },
+    { symbol: "Xe", name: "Xenon", atomicNumber: 54, atomicMass: 131.29 },
+    { symbol: "Cs", name: "Cesium", atomicNumber: 55, atomicMass: 132.91 },
+    { symbol: "Ba", name: "Barium", atomicNumber: 56, atomicMass: 137.33 },
+    { symbol: "La", name: "Lanthanum", atomicNumber: 57, atomicMass: 138.91 },
+    { symbol: "Ce", name: "Cerium", atomicNumber: 58, atomicMass: 140.12 },
+    { symbol: "Pr", name: "Praseodymium", atomicNumber: 59, atomicMass: 140.91 },
+    { symbol: "Nd", name: "Neodymium", atomicNumber: 60, atomicMass: 144.24 },
+    { symbol: "Pm", name: "Promethium", atomicNumber: 61, atomicMass: 145 },
+    { symbol: "Sm", name: "Samarium", atomicNumber: 62, atomicMass: 150.36 },
+    { symbol: "Eu", name: "Europium", atomicNumber: 63, atomicMass: 151.96 },
+    { symbol: "Gd", name: "Gadolinium", atomicNumber: 64, atomicMass: 157.25 },
+    { symbol: "Tb", name: "Terbium", atomicNumber: 65, atomicMass: 158.93 },
+    { symbol: "Dy", name: "Dysprosium", atomicNumber: 66, atomicMass: 162.5 },
+    { symbol: "Ho", name: "Holmium", atomicNumber: 67, atomicMass: 164.93 },
+    { symbol: "Er", name: "Erbium", atomicNumber: 68, atomicMass: 167.26 },
+    { symbol: "Tm", name: "Thulium", atomicNumber: 69, atomicMass: 168.93 },
+    { symbol: "Yb", name: "Ytterbium", atomicNumber: 70, atomicMass: 173.05 },
+    { symbol: "Lu", name: "Lutetium", atomicNumber: 71, atomicMass: 174.97 },
+    { symbol: "Hf", name: "Hafnium", atomicNumber: 72, atomicMass: 178.49 },
+    { symbol: "Ta", name: "Tantalum", atomicNumber: 73, atomicMass: 180.95 },
+    { symbol: "W", name: "Tungsten", atomicNumber: 74, atomicMass: 183.84 },
+    { symbol: "Re", name: "Rhenium", atomicNumber: 75, atomicMass: 186.21 },
+    { symbol: "Os", name: "Osmium", atomicNumber: 76, atomicMass: 190.23 },
+    { symbol: "Ir", name: "Iridium", atomicNumber: 77, atomicMass: 192.22 },
+    { symbol: "Pt", name: "Platinum", atomicNumber: 78, atomicMass: 195.08 },
+    { symbol: "Au", name: "Gold", atomicNumber: 79, atomicMass: 196.97 },
+    { symbol: "Hg", name: "Mercury", atomicNumber: 80, atomicMass: 200.59 },
+    { symbol: "Tl", name: "Thallium", atomicNumber: 81, atomicMass: 204.38 },
+    { symbol: "Pb", name: "Lead", atomicNumber: 82, atomicMass: 207.2 },
+    { symbol: "Bi", name: "Bismuth", atomicNumber: 83, atomicMass: 208.98 },
+    { symbol: "Po", name: "Polonium", atomicNumber: 84, atomicMass: 209 },
+    { symbol: "At", name: "Astatine", atomicNumber: 85, atomicMass: 210 },
+    { symbol: "Rn", name: "Radon", atomicNumber: 86, atomicMass: 222 },
+    { symbol: "Fr", name: "Francium", atomicNumber: 87, atomicMass: 223 },
+    { symbol: "Ra", name: "Radium", atomicNumber: 88, atomicMass: 226 },
+    { symbol: "Ac", name: "Actinium", atomicNumber: 89, atomicMass: 227 },
+    { symbol: "Th", name: "Thorium", atomicNumber: 90, atomicMass: 232.04 },
+    { symbol: "Pa", name: "Protactinium", atomicNumber: 91, atomicMass: 231.04 },
+    { symbol: "U", name: "Uranium", atomicNumber: 92, atomicMass: 238.03 },
+    { symbol: "Np", name: "Neptunium", atomicNumber: 93, atomicMass: 237 },
+    { symbol: "Pu", name: "Plutonium", atomicNumber: 94, atomicMass: 244 },
+    { symbol: "Am", name: "Americium", atomicNumber: 95, atomicMass: 243 },
+    { symbol: "Cm", name: "Curium", atomicNumber: 96, atomicMass: 247 },
+    { symbol: "Bk", name: "Berkelium", atomicNumber: 97, atomicMass: 247 },
+    { symbol: "Cf", name: "Californium", atomicNumber: 98, atomicMass: 251 },
+    { symbol: "Es", name: "Einsteinium", atomicNumber: 99, atomicMass: 252 },
+    { symbol: "Fm", name: "Fermium", atomicNumber: 100, atomicMass: 257 },
+    { symbol: "Md", name: "Mendelevium", atomicNumber: 101, atomicMass: 258 },
+    { symbol: "No", name: "Nobelium", atomicNumber: 102, atomicMass: 259 },
+    { symbol: "Lr", name: "Lawrencium", atomicNumber: 103, atomicMass: 262 },
+    { symbol: "Rf", name: "Rutherfordium", atomicNumber: 104, atomicMass: 267 },
+    { symbol: "Db", name: "Dubnium", atomicNumber: 105, atomicMass: 270 },
+    { symbol: "Sg", name: "Seaborgium", atomicNumber: 106, atomicMass: 271 },
+    { symbol: "Bh", name: "Bohrium", atomicNumber: 107, atomicMass: 270 },
+    { symbol: "Hs", name: "Hassium", atomicNumber: 108, atomicMass: 277 },
+    { symbol: "Mt", name: "Meitnerium", atomicNumber: 109, atomicMass: 278 },
+    { symbol: "Ds", name: "Darmstadtium", atomicNumber: 110, atomicMass: 281 },
+    { symbol: "Rg", name: "Roentgenium", atomicNumber: 111, atomicMass: 282 },
+    { symbol: "Cn", name: "Copernicium", atomicNumber: 112, atomicMass: 285 },
+    { symbol: "Nh", name: "Nihonium", atomicNumber: 113, atomicMass: 286 },
+    { symbol: "Fl", name: "Flerovium", atomicNumber: 114, atomicMass: 289 },
+    { symbol: "Mc", name: "Moscovium", atomicNumber: 115, atomicMass: 290 },
+    { symbol: "Lv", name: "Livermorium", atomicNumber: 116, atomicMass: 293 },
+    { symbol: "Ts", name: "Tennessine", atomicNumber: 117, atomicMass: 294 },
+    { symbol: "Og", name: "Oganesson", atomicNumber: 118, atomicMass: 294 }
+];
+
+function searchElement() {
+    const symbolInput = document.getElementById("elementInput").value.trim();
+    console.log("Input:", symbolInput);  // ตรวจสอบค่าที่ได้จาก input
+
+    const element = periodicTable.find(el => el.symbol.toLowerCase() === symbolInput.toLowerCase());
+    console.log("Found element:", element);  // ตรวจสอบว่าพบธาตุหรือไม่
+
+    if (element) {
+        document.getElementById("elementResult").innerText =
+            `ชื่อธาตุ: ${element.name}, เลขอะตอม: ${element.atomicNumber}, มวลอะตอม: ${element.atomicMass}`;
+    } else {
+        document.getElementById("elementResult").innerText = "ไม่พบธาตุที่ค้นหา";
+    }
+}
+
+    </script>
+<header class="header">
+  <h2 style="font-style: italic;">Calculator</h2> 
+  <a class="PeriodicTable-ed" href="https://artsexperiments.withgoogle.com/periodic-table/">
+    <button type="button" class="periodic-table">
+      <P class="periodicTablelink">PeriodicTable</P>
+    </button>
+  </a>
+  <a class="cal1" href="https://www.kidlek.com/scientific-calculator.php">
+    <button type="button" class="change"></button>
+  </a>
+  <a href="https://github.com/NICE-ERROR" class="gitd">
+    <button class="button1" target="_blank"></button>
+    <i class="fab fa-github"></i>
+  </a>
+
+  </a>
+</header>
+  <div class="div">
+    <input type="text" id="elementInput" class="input" placeholder="กรุณาใส่สัญลักษณ์ธาตุ เช่น H, O, Fe">
+    <button class="ค้นหา" onclick="searchElement()">ค้นหา</button>
+  </div>
+  <div class="edout">
+    <p class="output" id="elementResult"></p>
+  </div>
+  <div class="ligth"></div>
+  <main class="main" >
+    <div class="calculator" class="showef">
+      <div class="screen">
+        <div class="screen-last" id="lastOperationScreen"></div>
+        <div class="screen-current" id="currentOperationScreen"></div>
+      </div>
+      <div class="buttons-grid">
+        <button class="btn btn-red span-2" id="clearBtn" onclick="this.blur();">
+          CLEAR 
+        </button>
+        <button class="btn btn-blue span-2" id="deleteBtn" onclick="this.blur();">
+          DELETE
+        </button>
+        <!-- Add these buttons inside the buttons-grid div -->
+        <!-- กำลังสร้างตัวแปร  in progress
+        <button class="btn" onclick="this.blur();" id="openParenthesis" >(</button>
+        <button class="btn" onclick="this.blur();" id="closeParenthesis" >)</button>
+        -->
+        <button class="Update" >_(_</button>
+        <button class="Update" >_)_</button>
+        <button class="btn" onclick="this.blur();" data-operator>^</button>
+        <button class="btn" onclick="this.blur();" data-operator>√</button>
+
+        <button class="btn" class="showef" onclick="this.blur();" data-number>7</button>
+        <button class="btn" class="showef" onclick="this.blur();" data-number>8</button>
+        <button class="btn" class="showef" onclick="this.blur();" data-number>9</button>
+        <button class="btn" class="showef" onclick="this.blur();" data-operator>÷</button>
+
+        <button class="btn" class="showef" onclick="this.blur();" data-number>4</button>
+        <button class="btn" class="showef" onclick="this.blur();" data-number>5</button>
+        <button class="btn" class="showef" onclick="this.blur();" data-number>6</button>
+        <button class="btn" class="showef" onclick="this.blur();" data-operator>×</button>
+
+        <button class="btn" onclick="this.blur();" data-number>1</button>
+        <button class="btn" onclick="this.blur();" data-number>2</button>
+        <button class="btn" onclick="this.blur();" data-number>3</button>
+        <button class="btn" onclick="this.blur();" data-operator>−</button>
+
+        <button class="btn" onclick="this.blur();" id="pointBtn">.</button>
+        <button class="btn" onclick="this.blur();" data-number>0</button>
+        <button class="btn" onclick="this.blur();" id="equalsBtn">=</button>
+        <button class="btn" onclick="this.blur();" data-operator>+</button>
+ 
+      </div>
+    </div>
+  </main>
+  <script>
+    let firstOperand = ''
+let secondOperand = ''
+let currentOperation = null
+let shouldResetScreen = false
+let isSquareRoot = false; 
+
+const numberButtons = document.querySelectorAll('[data-number]')
+const operatorButtons = document.querySelectorAll('[data-operator]')
+const equalsButton = document.getElementById('equalsBtn')
+const clearButton = document.getElementById('clearBtn')
+const deleteButton = document.getElementById('deleteBtn')
+const pointButton = document.getElementById('pointBtn')
+const lastOperationScreen = document.getElementById('lastOperationScreen')
+const currentOperationScreen = document.getElementById('currentOperationScreen')
+  //const openParenthesisButton = document.getElementById('openParenthesis');
+  //const closeParenthesisButton = document.getElementById('closeParenthesis');
+
+window.addEventListener('keydown', handleKeyboardInput)
+equalsButton.addEventListener('click', evaluate)
+clearButton.addEventListener('click', clear)
+deleteButton.addEventListener('click', deleteNumber)
+pointButton.addEventListener('click', appendPoint)
+
+numberButtons.forEach((button) =>
+  button.addEventListener('click', () => appendNumber(button.textContent))
+)
+
+operatorButtons.forEach((button) =>
+  button.addEventListener('click', () => setOperation(button.textContent))
+)
+
+function appendNumber(number) {
+  if (currentOperationScreen.textContent === '0' || shouldResetScreen)
+    resetScreen()
+  currentOperationScreen.textContent += number
+}
+
+function resetScreen() {
+  currentOperationScreen.textContent = ''
+  shouldResetScreen = false
+}
+
+function clear() {
+  currentOperationScreen.textContent = ''
+  lastOperationScreen.textContent = ''
+  firstOperand = ''
+  secondOperand = ''
+  currentOperation = null
+}
+
+function appendPoint() {
+  if (shouldResetScreen) resetScreen()
+  if (currentOperationScreen.textContent === '')
+    currentOperationScreen.textContent = '0'
+  if (currentOperationScreen.textContent.includes('.')) return
+  currentOperationScreen.textContent += '.'
+}
+
+function deleteNumber() {
+  currentOperationScreen.textContent = currentOperationScreen.textContent
+    .toString()
+    .slice(0, -1)
+}
+
+function setOperation(operator) {
+  if (currentOperation !== null) evaluate()
+  firstOperand = currentOperationScreen.textContent
+  currentOperation = operator
+  lastOperationScreen.textContent = `${firstOperand} ${currentOperation}`
+  shouldResetScreen = true
+}
+
+function evaluate() {
+  if (currentOperation === null || shouldResetScreen) return
+  if (currentOperation === '÷' && currentOperationScreen.textContent === '0') {
+    alert("You can't divide by 0!")
+    return
+  }
+  secondOperand = currentOperationScreen.textContent
+  currentOperationScreen.textContent = roundResult(
+    operate(currentOperation, firstOperand, secondOperand)
+  )
+  lastOperationScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`
+  currentOperation = null
+}
+
+function roundResult(number) {
+  return Math.round(number * 1000) / 1000
+}
+
+function handleKeyboardInput(e) {
+  if (e.key >= 0 && e.key <= 9) appendNumber(e.key)
+  if (e.key === '.') appendPoint()
+  if (e.key === '=' || e.key === 'Enter') evaluate()
+  if (e.key === 'Backspace') deleteNumber()
+  if (e.key === 'Escape') clear()
+  if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/')
+    setOperation(convertOperator(e.key))
+}
+
+function setOperation(operator) {
+    if (currentOperation !== null) evaluate()
+    firstOperand = currentOperationScreen.textContent
+    currentOperation = operator
+    lastOperationScreen.textContent = `${firstOperand} ${currentOperation}`
+    shouldResetScreen = true
+}
+
+function setOperation(operator) {
+    if (operator === '√') {
+      isSquareRoot = true;  // ตั้งค่าว่ากำลังจะคำนวณรากที่สอง
+      currentOperation = operator;
+      lastOperationScreen.textContent = `√`;  // แสดงเครื่องหมายรากที่สอง
+      return;
+    }
+  
+    if (currentOperation !== null) evaluate();
+    firstOperand = currentOperationScreen.textContent;
+    currentOperation = operator;
+    lastOperationScreen.textContent = `${firstOperand} ${currentOperation}`;
+    shouldResetScreen = true;
+}
+  
+function evaluate() {
+    if (currentOperation === null || shouldResetScreen) return
+    if (currentOperation === '÷' && currentOperationScreen.textContent === '0') {
+        alert("You can't divide by 0!")
+        return
+    }
+    secondOperand = currentOperationScreen.textContent
+    currentOperationScreen.textContent = roundResult(
+        operate(currentOperation, firstOperand, secondOperand)
+    )
+    lastOperationScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`
+    currentOperation = null
+
+}
+
+function roundResult(number) {
+    return Math.round(number * 1000) / 1000
+}
+
+function handleKeyboardInput(e) {
+    if (e.key >= 0 && e.key <= 9) appendNumber(e.key)
+    if (e.key === '.') appendPoint()
+    if (e.key === '=' || e.key === 'Enter') evaluate()
+    if (e.key === 'Backspace') deleteNumber()
+    if (e.key === 'Escape') clear()
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/')
+        setOperation(convertOperator(e.key))
+    if (e.key === '^') setOperation('^')  // Handle exponentiation key
+    if (e.key === '√') setOperation('√')  // Handle square root key
+    if (e,key === '(') setOperation('(')
+    if (e.key === ')') setOperation('(')
+}
+
+function convertOperator(keyboardOperator) {
+    if (keyboardOperator === '/') return '÷'
+    if (keyboardOperator === '*') return '×'
+    if (keyboardOperator === '-') return '−'
+    if (keyboardOperator === '+') return '+'
+    if (keyboardOperator === '^') return '^'  // Exponentiation operator
+    if (keyboardOperator === '√') return '√'  // Square root operator
+    if (keyboardOperator === '(') return '('
+    if (keyboardOperator === '(') return ')'
+}
+
+function add(a, b) {
+    return a + b
+}
+
+function substract(a, b) {
+    return a - b
+}
+
+function multiply(a, b) {
+    return a * b
+}
+
+function divide(a, b) {
+    return a / b
+}
+
+function setOperation(operator) {
+    if (operator === '√') {
+      isSquareRoot = true;  // ตั้งค่าว่ากำลังจะคำนวณรากที่สอง
+      currentOperation = operator;
+      lastOperationScreen.textContent = `√`;  // แสดงเครื่องหมายรากที่สอง
+      return;
+    }
+  
+    if (currentOperation !== null) evaluate();
+    firstOperand = currentOperationScreen.textContent;
+    currentOperation = operator;
+    lastOperationScreen.textContent = `${firstOperand} ${currentOperation}`;
+    shouldResetScreen = true;
+  }
+  
+  // ฟังก์ชันสำหรับการคำนวณ
+function evaluate() {
+    if (currentOperation === null && !isSquareRoot) return;
+    
+    if (isSquareRoot) {
+      // ถ้าเป็นการคำนวณรากที่สอง
+      firstOperand = currentOperationScreen.textContent || '0';  // ถ้าไม่มีตัวเลขใช้ค่า 0
+      const result = Math.sqrt(Number(firstOperand));  // คำนวณรากที่สอง
+      currentOperationScreen.textContent = roundResult(result);  // แสดงผลลัพธ์
+      lastOperationScreen.textContent = `√${firstOperand} =`;  // แสดงผลการคำนวณ
+      isSquareRoot = false;  // รีเซ็ตตัวแปร
+      return;
+    }
+
+    secondOperand = currentOperationScreen.textContent;
+    currentOperationScreen.textContent = roundResult(
+      operate(currentOperation, firstOperand, secondOperand)
+    );
+    lastOperationScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`;
+    currentOperation = null;
+}
+  
+function operate(operator, a, b) {
+    a = Number(a);
+    b = Number(b);
+    switch (operator) {
+      case '+':
+        return add(a, b);
+      case '−':
+        return substract(a, b);
+      case '×':
+        return multiply(a, b);
+      case '÷':
+        if (b === 0) return null;
+        else return divide(a, b);
+      case '^':
+        return Math.pow(a, b);  // Exponentiation logic
+      default:
+        return null;
+    }
+}
+
+  </script>
+
+  <script> // in progress
+//    const calculator =document.querySelector('.calculator');
+//    const light = document.querySelector('.light');
+
+//    document.addEventListener('mousemove' ,
+//      (event) => {
+//        const mouseX = event.clientX;
+//        const mouseY = event.clientY;
+//        light.style.left = mouseX + 'px';
+//        light.style.top = mouseY + 'px' ;
+
+//        const distanceX = mouseX - text.offsetLeft - text.offsetWidth / 2 ;
+//        const distanceY = mouseY - text.offsetLeft - text.offsetHeight / 2 ;
+
+//        let newShadow = '' 
+//        for (let i = 0; i < 200; i++) 
+//        { const shadowX = -distanceX * (i / 200) ; 
+//          const shadowY = -distanceY * (i / 200) ; 
+//          const opacity = 1 - (i / 100);
+//           newShadow += (newShadow ? ',' : '') + `${shadowX}px 
+//           ${shadowY}px 0 rgba(33,33,33,
+//           ${opacity})`;
+//        } calculator.stye.textShadow = newShadow;
+//      }
+//    );
+  </script>
+
+  <style>
+  .header{
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  background-color: #ff8fd6f3;
+  margin-top: 20px;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.div{
+  justify-items: flex-start;
+  display: flex;
+  margin: auto;
+  align-items: center;
+}
+
+.cal1{
+  text-align: center;
+  justify-items: flex-start;
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.ค้นหา{
+  text-align: center;
+  width: auto;
+  margin: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  justify-items: flex-start;
+  background-color: rgb(233, 139, 228);
+  border-radius: 5px;
+  border: 2px double blueviolet;
+}
+
+.ค้นหา:hover{
+  color: blue;
+  background-color: lightsalmon;
+  transition:  0.4s ease;
+  transform: scale(0.96);
+}
+
+.ค้นหา:active{
+  background-color: #ff0000;
+  color: #000;
+}
+.input{
+  width: 100%;
+  margin: auto;
+  font-size: 17px;
+  justify-content: center;
+  display: flex;
+  background-color: rgba(226, 186, 255, 0.667);
+  border-radius: 7px;
+  border: 3px solid rgb(226, 43, 43);
+}
+
+.input:hover{
+  border: inset 3px rgb(255, 0, 0);
+  transform: scale(0.993);
+  transition: 0.4s ease;
+}
+
+.input:active{
+  background-color: white;
+}
+
+.edout{
+  justify-items: center;
+  display: flex;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.603);
+  width: auto;
+}
+
+.output{
+  margin: auto;
+  justify-items: flex-start;
+  display: flex;
+}
+
+button {
+  justify-items: flex-start;
+	border: none;
+	color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	cursor: pointer;
+	outline: none;
+	transition: 0.5s ease;
+  align-items: center;
+  margin: auto;
+}
+
+.btn:hover { 
+    transform: scale(0.8);
+}
+
+.change{
+  background-image: url("https://cdn3d.iconscout.com/3d/premium/thumb/calculator-3d-icon-download-in-png-blend-fbx-gltf-file-formats--accounting-calculation-finance-math-mathematics-mobile-apps-pack-user-interface-icons-8550483.png");
+  background-size: cover;
+  align-items: flex-start;
+  margin-left: auto;
+	cursor: pointer;
+	mask-image: none;
+	width: 40px;
+  height: 40px;
+	border-radius: 10px;
+	border: 1.5px white solid;
+}
+
+.change:hover {
+	transform: scale(1.1) rotate(360deg);
+	width: 40px;
+  height: 40px;
+	border-radius: 10px;
+	border: 2px rgb(255, 0, 0) solid;
+	margin-left: auto;
+}
+.periodic-table{
+    display: flex;
+    justify-items: flex-start;
+    cursor: pointer;
+    left: 100%;
+    background-image: url("https://t4.ftcdn.net/jpg/05/34/46/55/360_F_534465593_vrjvDwqJ7vQV2ykNjRV1dbhCXSc4Pf1n.jpg");
+    border-radius: 20px;
+    background-size: 100%;
+    width: 100%;
+    background-size: cover;
+    background-color: rgb(120, 120, 170);
+    border: 1.2px;
+    width: 110px;
+    height: 30px;
+    text-decoration: none;
+    margin: auto;
+    
+}
+
+.periodicTablelink{
+    margin: auto;
+    display: flex;
+    justify-items: flex-start;
+    color: white;
+    text-align: center;
+    font-style: oblique;
+    text-decoration: none;
+}
+
+.periodic-table:hover{
+    transform: scale(0.7);
+}
+
+.PeriodicTable-ed{
+  justify-items: flex-start;
+  display: flex;
+  margin: auto;
+  text-decoration: none;
+}
+
+:root {
+	--font: #020202;
+	--btn: #ff8fdcc8;
+	--btn-hover: #983d3dd1;
+	--btn-active: #f41dffe1;
+	--btn-red: rgb(255, 132, 45);
+	--btn-red-hover: rgba(255, 0, 0, 0.475);
+	--btn-red-active: rgba(255, 119, 0, 0.747);
+	--btn-blue: rgb(255, 70, 70);
+	--btn-blue-hover: rgba(255, 0, 0, 0.413);
+	--btn-blue-active: rgba(253, 75, 75, 0.498);
+  }
+  
+  *,
+  *::before,
+  *::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+  }
+
+
+  body {
+    background-image: url(https://i.pinimg.com/originals/69/a6/0f/69a60f001389c83a8f1f636c93710672.jpg);
+    background-color: rgb(0, 0, 0);
+    background-size: cover;
+    max-width: 100%;
+    padding: auto;
+    color: var(--font);
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+  }
+
+  .right-aligned {
+    margin-left: auto;
+	}
+
+  button {
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: 0.5s ease;
+  }
+
+  .btn:hover{
+    transform: scale(0.9);
+  }
+
+  /* MAIN */
+  
+  .main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    min-height: 500px;
+    padding: 10px;
+    margin-top: 50px;
+  }
+  
+  /*
+  .light{
+    top: 50vh;
+    left: 50vw;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 
+    0 0 15px white,
+    0 0 50px white,
+    0 0 100px white,
+    0 0 200px white,
+    0 0 300px white;
+    transition: none;
+  }
+  */
+
+  .calculator {
+    background-size: cover;
+    margin-top: 40px;
+    width: 400px;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: rgba(143, 143, 143, 0.559);
+    background-image: url(https://i.pinimg.com/736x/6c/90/1f/6c901fc0ce4801f211a3d68e5279682a.jpg);
+  }
+  
+  .screen {
+	color: #000000;
+	padding: 10px 20px;
+	border: 6px inset rgb(243, 186, 195);
+	border-radius: 5px;
+	margin-bottom: 20px;
+	background-image: url(https://i.pinimg.com/736x/19/b4/5a/19b45a7784e33eb9e256e2fae77cd82e.jpg);
+  background-size: cover;
+	background-color: rgb(153, 238, 173);
+	text-align: right;
+	word-wrap: break-word;
+	word-break: break-all;
+  }
+  
+  .screen-last {
+	min-height: 32px;
+	font-size: 20px;
+  }
+  
+  .screen-current {
+	min-height: 64px;
+	font-size: 40px;
+  }
+
+  .buttons-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 10px;
+  }
+  
+  .span-2 {
+	grid-column: span 2;
+  }
+  
+  .Update{
+    background-color: #f6b621;
+    color: #ffffff;
+    background-image: url("https://png.pngtree.com/png-vector/20220616/ourmid/pngtree-work-in-progress-warning-sign-with-yellow-and-black-stripes-painted-png-image_5060340.png");
+    background-size: cover;
+    width: 100%;
+    padding: 20px;
+	  border: 1.5px solid;
+	  border-radius: 5px;
+    font-size: 20px;
+    cursor: not-allowed;
+  }
+
+  .Update:hover{
+    border-radius: 50px;
+    color: #51ff00;
+    background-color: red;
+    border: 1.5px solid rgb(255, 251, 0);
+  }
+
+  .btn {
+  width: 100%;
+	padding: 20px;
+	border: 1.5px solid;
+	border-radius: 5px;
+	background-color: var(--btn);
+	font-size: 20px;
+  }
+  
+  .btn:hover {
+  transition: 0.2s ease;
+  transform: scale(0.8);
+  border: inset 1.9998px;
+	background-color: var(--btn-hover);
+  border-radius: 30px;
+  color: #ffffff;
+  }
+  
+  .btn:active {
+	background-color: var(--btn-active);
+  transform: scale(1.01);
+  }
+  
+  .btn-red {
+	background-color: var(--btn-red);
+  }
+  
+  .btn-red:hover {
+	background-color: var(--btn-red-hover);
+  }
+  
+  .btn-red:active {
+	background-color: var(--btn-red-active);
+  }
+  
+  .btn-blue {
+	background-color: var(--btn-blue);
+  }
+  
+  .btn-blue:hover {
+	background-color: var(--btn-blue-hover);
+  }
+  
+  .btn-blue:active {
+	background-color: var(--btn-blue-active);
+  }
+
+  .button1{
+    text-decoration: none;
+    margin: auto;
+    justify-items: flex-start;
+  }
+
+  .gitd{
+    text-decoration: none;
+  }
+
+  .fa-github {
+  justify-items: flex-start;
+  margin-left: auto;
+  margin-right: 10px;
+  text-decoration: none;
+	color: var(--font);
+	font-size: 30px;
+	transition: transform 0.3s ease-in-out;
+  }
+  
+  .fa-github:hover {
+	transform: rotate(360deg) scale(1.2);
+	color: rgb(230, 255, 6);
+	border: rgb(0, 0, 255) solid 2px;
+	border-radius: 20px;
+  }
+
+  </style>
+</body>
+</html>
