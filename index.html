@@ -495,6 +495,22 @@ function operate(operator, a, b) {
 //    );
   </script>
 
+<script>
+  // เลือกปุ่มทั้งหมดที่มี 
+const buttons = document.querySelectorAll('.btn, .class1, . change, .ค้นหา');
+
+// วนลูปผ่านแต่ละปุ่มและเพิ่มแอนิเมชัน
+buttons.forEach(button => {
+  button.addEventListener('touchstart', function() {
+    this.style.transform = 'scale(0.95)';
+  });
+
+  button.addEventListener('touchend', function() {
+    this.style.transform = 'scale(1)';
+  });
+});
+</script>
+
   <style>
   .header{
   top: 0;
