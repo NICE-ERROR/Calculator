@@ -386,3 +386,19 @@ button {
 	border: rgb(0, 0, 255) solid 2px;
 	border-radius: 20px;
   }
+
+  /* Hover for desktop only */
+        @media (hover: hover) {
+            button:hover {
+                background-color: #42a5f5;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Active for touch screens only */
+        @media (hover: none) {
+            button:active {
+                background-color: #ff4081;
+                transform: scale(0.95);
+            }
+        }
