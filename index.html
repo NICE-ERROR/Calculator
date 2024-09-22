@@ -498,7 +498,7 @@ function operate(operator, a, b) {
 
 <script>
   // เลือกปุ่มทั้งหมดที่มี 
-const buttons = document.querySelectorAll('.btn, .class1, . change, .ค้นหา');
+const buttons = document.querySelectorAll('.btn, .class1, .change, .ค้นหา');
 
 // วนลูปผ่านแต่ละปุ่มและเพิ่มแอนิเมชัน
 buttons.forEach(button => {
@@ -512,5 +512,17 @@ buttons.forEach(button => {
 });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+            if (window.matchMedia('(hover: hover)').matches) {
+                document.querySelectorAll('.btn , .class1 , .ค้นหา , .change').forEach(button => {
+                    button.addEventListener('mousedown', function(e) {
+                        e.preventDefault();  // Disable active on desktop
+                    });
+                });
+            }
+        });
+</script>
+    
 </body>
 </html>
