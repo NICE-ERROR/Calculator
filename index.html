@@ -117,40 +117,5 @@
 //      }
 //    );
   </script>
-
-<script>
-  // เลือกปุ่มทั้งหมดที่มี 
-const buttons = document.querySelectorAll('.btn, .class1, .change, .ค้นหา');
-
-// วนลูปผ่านแต่ละปุ่มและเพิ่มแอนิเมชัน
-buttons.forEach(button => {
-  button.addEventListener('touchstart', function() {
-    this.style.transform = 'scale(0.95)';
-  });
-
-  button.addEventListener('touchend', function() {
-    this.style.transform = 'scale(1)';
-  });
-});
-</script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-            if (window.matchMedia('(hover: hover)').matches) {
-                document.querySelectorAll('button').forEach(button => {
-                    button.addEventListener('mousedown', function(e) {
-                        e.preventDefault();  // Disable active on desktop
-                    });
-                });
-            }
-        });
-</script>
-
-<style>
-  button {
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.1s ease;
-        }
-</style>
 </body>
 </html>
