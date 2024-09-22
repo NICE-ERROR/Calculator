@@ -515,7 +515,7 @@ buttons.forEach(button => {
 <script>
   document.addEventListener('DOMContentLoaded', () => {
             if (window.matchMedia('(hover: hover)').matches) {
-                document.querySelectorAll('.btn , .class1 , .ค้นหา , .change').forEach(button => {
+                document.querySelectorAll('button').forEach(button => {
                     button.addEventListener('mousedown', function(e) {
                         e.preventDefault();  // Disable active on desktop
                     });
@@ -523,6 +523,12 @@ buttons.forEach(button => {
             }
         });
 </script>
-    
+
+<style>
+  button {
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s ease;
+        }
+</style>
 </body>
 </html>
