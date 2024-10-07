@@ -7,13 +7,13 @@
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/3352/3352488.png" />
+    <link rel="shortcut icon" href="https://cdn-icons-png.freepik.com/512/659/659873.png" />
     <script
       src="https://kit.fontawesome.com/4c536a6bd5.js"
       crossorigin="anonymous"
     ></script>
     <script defer></script>
-    <title>Calculator</title>
+    <title>Calculator Test version</title>
   </head>
   <body>
     <script>
@@ -734,8 +734,8 @@ button {
     border: 6px rgb(214, 65, 83) inset;
     border-radius: 5px;
     margin-bottom: 20px;
-    background-image: url(https://www.shutterstock.com/image-vector/soft-pink-background-wallpaper-260nw-1162582933.jpg);
-    background-size: cover;
+    background-image: url(https://png.pngtree.com/background/20210717/original/pngtree-abstract-geometric-pink-background-picture-image_1440088.jpg);
+    background-size: contain;
     background-color: rgb(153, 238, 173);
     text-align: right;
     word-wrap: break-word;
@@ -750,6 +750,9 @@ button {
   .screen-current {
     min-height: 64px;
     font-size: 40px;
+  }
+  .screen:active{
+    background-color: #000000;
   }
 
   .buttons-grid {
@@ -784,20 +787,26 @@ button {
   }
 
   .btn {
+    color:black;
     width: 100%;
     padding: 20px;
     border: 1.5px solid;
-    border-radius: 5px;
+    border-radius: 12px;
     background-color: rgba(255, 135, 255, 0.808);
+    background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20220218/pngtree-pink-geometric-background-module-image_960383.jpg');
+    background-size: cover;
     font-size: 20px;
+    cursor: pointer;
   }
   
-  .btn:active {
+  .btn:active{
     transition: 0.1s ease;
     background-color: #fe00e0;
-    border: inset 1.9998px;
-    border-radius: 20px;
+    border: solid white;
+    border-radius: 50px;
     color: #ffffff;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgjbJhczXhy4mE1dDMbhiJSYOp7Dc-dSoQMDSf28gb6qa-eylKwYLSDCvyvtComZJvbEM&usqp=CAU');
+    background-size: cover;
   }
 
   .btn-red {
@@ -805,7 +814,7 @@ button {
   }
   
   .btn-red:active {
-	  transition: 0.2s ease ;
+	  transition: 0.1s ease;
     background-color: red;
   }
 
@@ -814,7 +823,7 @@ button {
   }
   
   .btn-blue:active {
-	  transition: 0.2s ease ;
+	  transition: 0.1s ease;
     background-color: red;
   }
 
